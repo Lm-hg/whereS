@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Download WHERE'S</title>
     <meta name="description" content="Un jeu passionnant qui mettra votre intuition et votre culture générale à l'épreuve. Téléchargez WHERE'S sur le Play Store et amusez-vous dès maintenant.">
-    <meta name="keywords" content="jeu WHERE'S, intuition, culture générale, télécharger, Play Store, jeu de société, deviner le pays, Madei">
+    <meta name="keywords" content="jeu WHERE'S, intuition, culture générale, télécharger, Play Store, jeu de société, deviner le pays, Madei WHERES">
     <meta name="robots" content="index, follow">
     <link rel="icon" href="./assets/madei.png">
     <style>
@@ -18,7 +18,7 @@
         body {
             font-family: Arial, sans-serif;
             background: linear-gradient(to right, #ff7e5f, #feb47b);
-            color: #ffff;
+            color: #fff;
             line-height: 1.6;
             overflow-x: hidden;
             background-image: url('./assets/fond.jpg');
@@ -59,7 +59,7 @@
         }
 
         .rules {
-            background: rgba(237 227 241 / 10%);
+            background: rgba(237, 227, 241, 0.1);
             padding: 20px;
             border-radius: 10px;
             margin: 20px 0;
@@ -87,6 +87,7 @@
             justify-content: center;
             margin-top: 20px;
         }
+
         h1, h2 {
             color: #ff6f00;
         }
@@ -100,10 +101,17 @@
             font-size: 1.2rem;
             font-weight: bold;
             transition: background 0.3s;
+            animation: pulse 1.5s infinite;
         }
 
         .download-button a:hover {
             background: #d35400;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
 
         footer {
@@ -121,20 +129,50 @@
         footer a:hover {
             text-decoration: underline;
         }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            .rules h2 {
+                font-size: 2rem;
+            }
+
+            .rules ul li {
+                font-size: 1rem;
+            }
+
+            .download-button a {
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .fade-in.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>WHERE'S</h1>
-        <p>Un jeu passionnant qui mettra votre intuition et votre culture générale à l'épreuve.</p>
+        <h1 class="fade-in">WHERE'S</h1>
+        <p class="fade-in">Un jeu passionnant qui mettra votre intuition et votre culture générale à l'épreuve.</p>
     </header>
 
     <div class="container">
-        <div class="game-image">
+        <div class="game-image fade-in">
             <img src="./assets/logoW.png" alt="Logo du jeu WHERE'S">
         </div>
 
-        <div class="rules">
+        <div class="rules fade-in">
             <h2>Règles du jeu</h2>
             <ul>
                 <li>1. Devinez le pays, la ville ou le quartier à partir des images proposées.</li>
@@ -145,7 +183,7 @@
             </ul>
         </div>
 
-        <div class="download-button">
+        <div class="download-button fade-in">
             <a href="https://play.google.com/store/apps/details?id=com.lmhg.WhereS">Télécharger sur le Play Store</a>
         </div>
     </div>
@@ -154,5 +192,21 @@
         © 2024 WHERE'S - Développé par MADEI. Tous droits réservés. | 
         <a href="./politique.html" target="_blank">Politique de confidentialité</a>
     </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const elements = document.querySelectorAll(".fade-in");
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("show");
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            elements.forEach(el => observer.observe(el));
+        });
+    </script>
 </body>
 </html>
